@@ -17,10 +17,13 @@ export class PolicyPage implements OnInit{
     ngOnInit(){
         this.policyservice.getPolicies().subscribe(data => {
             this.policies = data.map( e => {
+                let dta = e.payload.doc.data();
+                console.log("Info: ", dta);
                 return {
-                    name: e.payload.doc.id,
-                    value: e.payload.doc.data()
+                    name: e.payload.doc.get('name'),
+                    value: e.payload.doc.get('value')
                 } as IPolicy
+                
             })
         })
     }
